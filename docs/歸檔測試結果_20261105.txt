@@ -1,0 +1,15 @@
+PASS single player does not win merely by joining
+PASS 3 players: one EOF leaves 2 alive; second disconnect creates server-authoritative winner
+PASS raw TCP half-close is treated as EOF
+PASS heartbeat timeout removes a client that still reads snapshots
+PASS all players leaving resets round; next solo does not inherit previous win
+PASS deep-copy snapshot is isolated from game mutation
+PASS Swing connection refused shows one specific notice; EDT stays responsive
+PASS Swing: 3-to-2 notice continues play, 2-to-1 notice wins once
+PASS Server shutdown shows connection loss, never a fabricated victory
+PASS silent handshake times out without freezing Swing
+PASS silent connected Server is detected by incoming-message deadline
+PASS reconnect button recovers from refusal and Server restart without stale callbacks
+MEASURED production timeout 10035 ms
+PASS production 10-second Server timeout is exercised on a real Socket
+RESULT 13 scenarios, 55 assertions passed.

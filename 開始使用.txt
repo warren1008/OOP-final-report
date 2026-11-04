@@ -1,0 +1,76 @@
+多人連線貪吃蛇 操作原型 儲存庫版
+整理日期：2026/11/05（儲存庫版使用說明）
+
+這份資料夾是 2026/11/05 整理的多人操作原型，唯一維護來源是 OOP-final-report 儲存庫。
+保存分支：prototype/multiplayer-20261105；固定版本標籤：prototype-20261105。
+main 保留作為期末正式成果的後續整合位置；本原型與期末成果分開保存。
+本日期是整理日期，尚未確認是否與期中當天展示版本完全相同。
+程式碼沿用原版本，包含多人加入、圓形地圖、跟隨視角、彩色食物、長度排行與斷線提示。
+
+一、下載後先做什麼
+1. 請下載整個 ZIP 並解壓縮，不要直接在 ZIP 裡雙擊啟動檔。
+2. 保留完整資料夾結構。資料夾可放在其他位置，不需要原電腦的工作目錄。
+3. 電腦需要安裝 JDK 17 以上，並讓 java、javac 可以執行。只有 JRE 不足以編譯。
+4. 使用 Windows PowerShell 或終端機開啟本資料夾。第三方函式庫不用另外下載。
+
+二、同一台電腦試玩
+1. 在第一個 PowerShell 視窗輸入：
+   .\run-server.cmd
+   出現「Server started on port 12345」後，保留這個視窗。
+2. 在另一個 PowerShell 視窗輸入：
+   .\run-client.cmd PlayerA 127.0.0.1 12345
+   在連線視窗確認名稱、IP 和 Port 後加入。
+3. 再開一個 PowerShell 視窗輸入：
+   .\run-client.cmd PlayerB 127.0.0.1 12345
+   想增加玩家，可以再開其他 Client，並改用不同名稱。
+4. 點選要操作的玩家視窗，再用方向鍵控制。這版連上就能玩，沒有準備與倒數按鈕。
+5. 關閉玩家視窗即離線。所有玩家離開後，Server 會重設下一局。
+6. 結束 Server 時，在 Server 的終端機按 Ctrl+C。
+
+也可以雙擊 run-server.cmd、run-client.cmd。run-client.cmd 每啟動一次就開一位玩家。
+run-server.cmd 和 run-client.cmd 都會先編譯，第一次執行時會自動產生 build 資料夾。
+
+三、兩台電腦一起操作
+兩台電腦都下載、解壓縮同一份資料夾，並安裝 JDK 17 以上。
+主機先執行 run-server.cmd，自己的 Client 使用 127.0.0.1、Port 12345。
+另一台的 Client 改填主機的區網 IPv4 位址，Port 同樣填 12345。
+如果無法連線，先確認 Server 已啟動、IP 和 Port 正確，以及網路允許兩台電腦互連。
+這份程式已做同機 TCP 測試，實體雙機、拔線與路由器中斷仍待小組驗證。
+
+四、程式放在哪裡
+A1143349_previous/  正式原型的 4 個 Java 原始碼，不是另一份舊備份。
+  SnakeServer.java       多人連線、遊戲更新、斷線清理與勝負判定
+  SnakeClient.java       玩家視窗、鍵盤輸入、畫面、排行與提示
+  ClientConnection.java  連線、背景收發、心跳與逾時
+  GameState.java         遊戲資料、玩家與事件等傳輸物件
+tests/              2 個 Java 測試與畫面擷取程式
+docs/               原驗證紀錄、測試輸出、實際介面截圖、歷史打包檢查與歸檔紀錄
+build.ps1           編譯與測試的主要腳本
+build.cmd           編譯入口
+run-server.cmd      啟動伺服器
+run-client.cmd      啟動玩家端
+test.cmd            執行同機網路與 Swing 測試
+capture.cmd         執行真實程式並重新擷取提示與介面
+README.md           版本用途、切換方式與專案說明
+原雲端分享包另附 SHA256SUMS.txt，僅校驗當時分享包，不適用於本次新增說明後的儲存庫內容。
+
+五、修改後如何驗證
+只編譯：在本資料夾執行 .\build.cmd
+編譯並測試：執行 .\test.cmd
+重新擷取實際介面：執行 .\capture.cmd
+測試會暫時開啟 Swing 視窗，請讓它自行完成。正常完成會顯示：
+RESULT 13 scenarios, 55 assertions passed.
+capture.cmd 會更新 docs/screenshots 內的固定檔名圖片。
+
+六、目前尚未完成
+這版保留文字指令與 Java 物件傳輸，未切換 JSON。
+同步碰撞、Observer、State、準備倒數及同一連線再玩一次仍待整合。
+重新連線是建立新連線，不會恢復上一局的進度。
+
+七、下載、分享與後續維護
+儲存庫：https://github.com/warren1008/OOP-final-report
+固定原型：https://github.com/warren1008/OOP-final-report/tree/prototype-20261105
+請從固定原型頁選擇 Code → Download ZIP，下載後完整解壓縮。
+GitHub 的原始碼 ZIP 不含 Git 歷史與 build 編譯快取，啟動時會自動編譯。
+儲存庫外的日期分享包保留作為歷史試玩副本，不另外編輯維護。
+後續修正應在儲存庫內透過新的分支與提交進行，固定原型標籤不隨後續開發移動。

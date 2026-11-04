@@ -1,0 +1,7 @@
+CAPTURE 01-connection-failed
+CAPTURE 02-server-disconnected
+CAPTURE 03-player-left-continues
+CAPTURE 04-last-survivor
+CAPTURE 05-server-timeout
+MEASURED production Client timeout 10138 ms
+CAPTURE RESULT 5 real GUI scenarios exported; originals contain no painted-in replacement messages.

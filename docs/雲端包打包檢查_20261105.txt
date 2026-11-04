@@ -1,0 +1,28 @@
+﻿雲端分享版打包檢查
+檢查時間：2026-11-05T00:43:48+08:00
+來源：OOP-final-report
+環境：Windows，JDK 25.0.2，以 --release 17 編譯。
+
+本次從整理包解壓到不同的中文資料夾，再執行 test.cmd。
+編譯成功，產物為 Java 17 格式，13 個情境、55 項檢查通過。
+4 個原型 Java 檔及 2 個測試 Java 檔，與來源逐一核對 SHA-256，內容相同。
+不包含 .git 歷史與 build 編譯快取。啟動時會自動重建 build。
+這次只重新驗證打包內容與原有同機測試，未進行實體雙機與長時間測試。
+
+以下為本次實際測試輸出
+
+PASS single player does not win merely by joining
+PASS 3 players: one EOF leaves 2 alive; second disconnect creates server-authoritative winner
+PASS raw TCP half-close is treated as EOF
+PASS heartbeat timeout removes a client that still reads snapshots
+PASS all players leaving resets round; next solo does not inherit previous win
+PASS deep-copy snapshot is isolated from game mutation
+PASS Swing connection refused shows one specific notice; EDT stays responsive
+PASS Swing: 3-to-2 notice continues play, 2-to-1 notice wins once
+PASS Server shutdown shows connection loss, never a fabricated victory
+PASS silent handshake times out without freezing Swing
+PASS silent connected Server is detected by incoming-message deadline
+PASS reconnect button recovers from refusal and Server restart without stale callbacks
+MEASURED production timeout 10022 ms
+PASS production 10-second Server timeout is exercised on a real Socket
+RESULT 13 scenarios, 55 assertions passed.
